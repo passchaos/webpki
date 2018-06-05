@@ -102,6 +102,11 @@ impl<'a> DNSNameRef<'a> {
         let s: &str = self.clone().into();
         DNSName(s.to_ascii_lowercase())
     }
+
+    /// Constructs a `DNSNameRef` without verify name
+    pub fn from_ascii_str_danger(dns_name: &str) -> DNSNameRef {
+        DNSNameRef(untrusted::Input::from(dns_name.as_bytes()))
+    }
 }
 
 #[cfg(feature = "std")]
