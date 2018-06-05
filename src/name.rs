@@ -93,6 +93,11 @@ impl<'a> DNSNameRef<'a> {
     pub fn try_from_ascii_str(dns_name: &str) -> Result<DNSNameRef, ()> {
         DNSNameRef::try_from_ascii(untrusted::Input::from(dns_name.as_bytes()))
     }
+
+    /// Constructs a `DNSNameRef` without verify name
+    pub fn from_ascii_str_danger(dns_name: &str) -> DNSNameRef {
+        DNSNameRef(untrusted::Input::from(dns_name.as_bytes()))
+    }
 }
 
 #[cfg(feature = "std")]
